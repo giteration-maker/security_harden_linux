@@ -91,7 +91,7 @@ display_version() {
 # Function to check system requirements
 check_requirements() {
     if ! command -v lsb_release &> /dev/null; then
-        handle_error "lsb_release command not found. This script requires an Ubuntu-based system."
+        handle_error "lsb_release command not found. This script requires an Ubuntu-based or Debian-based system."
     fi
 
     local os_name=$(lsb_release -si)
@@ -101,8 +101,10 @@ check_requirements() {
         handle_error "This script is designed for Ubuntu or Debian-based systems. Detected OS: $os_name"
     fi
 
-    if [[ $(echo "$os_version < 18.04" | bc) -eq 1 ]]; then
+    if [[ "$os_name" == "Ubuntu" && $(echo "$os_version < 18.04" | bc) -eq 1 ]]; then
         handle_error "This script requires Ubuntu 18.04 or later. Detected version: $os_version"
+	elif [[ "$os_name" == "Debian" && $(echo "$os_version < 12.0" | bc) -eq 1 ]]; then
+	handle_error "This script requires Debian 12.0 or later. Detected version: $os_version"
     fi
 
     log "System requirements check passed. OS: $os_name $os_version"
