@@ -1,5 +1,6 @@
 # Ubuntu / Debian Linux Security Hardening Scripts
-
+My forks makes this script run on Debian also.
+By default it only runs on Ubuntu. When I ran with Debian 12.0 faced an error: "The script requires Ubuntu 18.04 or later.". This indicated me that it assumes my system is Ubuntu.
 ## Table of Contents
 - [Overview](#overview)
 - [Scripts](#scripts)
